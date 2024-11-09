@@ -4,8 +4,8 @@ Follow these steps to set up and run the weather agent and client agent:
 
 1. **Clone the repository:**
    ```sh
-   git clone <repository_url>
-   cd <repository_name>
+   git clone https://github.com/kushhansagarwal/fetch-demo
+   cd fetch-demo
    ```
 
 2. **Create a virtual environment:**

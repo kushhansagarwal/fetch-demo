@@ -14,15 +14,6 @@ class LocationMessage(Model):
     """
     location: str
 
-class WeatherMessage(Model):
-    """
-    A model representing a message containing weather information.
-
-    Attributes:
-        weather_info (str): The weather information for a specific location.
-    """
-    weather_info: str
-
 class PostRequest(Model):
     """
     A model representing a POST request containing location information.
@@ -44,29 +35,6 @@ class PostResponse(Model):
     location: str
     timestamp: int
     agent_address: str
-
-@client_agent.on_message(model=WeatherMessage)
-async def handle_weather_response(ctx: Context, sender: str, msg: WeatherMessage):
-    """
-    Handles incoming weather messages and logs the weather information.
-
-    Args:
-        ctx (Context): The context in which the message is received.
-        sender (str): The address of the sender.
-        msg (WeatherMessage): The message containing the weather information.
-    """
-    ctx.logger.info(f"Received weather info from {sender}: {msg.weather_info}")
-
-async def send_location(ctx: Context):
-    """
-    Sends location information to the weather agent based on user input.
-
-    Args:
-        ctx (Context): The context in which the function is executed.
-    """
-    location = input("Enter the location: ")
-    await ctx.send(weather_agent.address, LocationMessage(location=location))
-    ctx.logger.info(f"Sent location: {location}")
 
 @client_agent.on_rest_post("/rest/post", PostRequest, PostResponse)
 async def handle_post(ctx: Context, req: PostRequest) -> PostResponse:
